@@ -1,5 +1,15 @@
-let hoje = newdate('20/12/2025');
-let eventday = newdate('25/12/205');
+let today = new Date('2025/1/20');
+let eventday = new Date('2026/12/12');
+
+let time = (eventday - today);
+let day = ( 24 * 60 * 60 * 1000 );
+
+let conversion = Math.ceil(time / day);
+alert(`faltam ${conversion} dias para o evento`);
+
+
+
+
 
 
 
