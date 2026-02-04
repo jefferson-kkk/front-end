@@ -1,109 +1,142 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Cartão Minimal</title>
-  <style>
-    :root{--bg:#f7f9fb;--card-bg:#ffffff;--card-text:#111}
-    *{box-sizing:border-box}
-    body{margin:0;height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);font-family:Inter,Segoe UI,system-ui,-apple-system,Arial}
-
-    .wrap{width:min(520px,94vw);display:grid;grid-template-columns:1fr 260px;gap:1rem;align-items:start}
-
-    form{display:flex;flex-direction:column;gap:.6rem}
-    label{font-size:.85rem;color:#444}
-    input{padding:.55rem;border:1px solid #e6eaf0;border-radius:8px;font-size:1rem;background:transparent}
-
-    .card{background:var(--card-bg);padding:1rem;border-radius:10px;border:1px solid #eef2f6;color:var(--card-text);display:flex;flex-direction:column;gap:.2rem;min-height:90px;justify-content:center}
-    .name{font-weight:700;font-size:1.05rem}
-    .job{font-size:.9rem;color:#556}
-
-    /* paleta minimal */
-    .colors{display:flex;gap:.5rem;margin-top:.35rem}
-    .swatch{width:30px;height:30px;border-radius:8px;border:2px solid transparent;cursor:pointer}
-    .swatch.selected{outline:3px solid rgba(0,0,0,0.06);transform:translateY(-2px)}
-
-    .note{font-size:.85rem;color:#666;margin-top:.4rem}
-
-    @media (max-width:720px){.wrap{grid-template-columns:1fr;}}
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <form id="form">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cartão Muito Simples</title>
+    <style>
+      /* Estilos bem simples */
+      body {
+        font-family: Arial;
+        margin: 20px;
+        background: #f5f7fa;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+      }
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 6px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+      }
+      .card {
+        width: 220px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #fff;
+        color: #111;
+        border: 1px solid #e6e9ee;
+      }
+      .name {
+        font-weight: 700;
+      }
+      .job {
+        color: #555;
+        margin-top: 6px;
+      }
+      .colors {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .btn-color {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        border: 0;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Formulário simples -->
+    <div class="container">
       <div>
-        <label for="nome">Nome</label>
-        <input id="nome" type="text" placeholder="Ex: Ana Silva">
-      </div>
-      <div>
-        <label for="cargo">Cargo</label>
-        <input id="cargo" type="text" placeholder="Ex: Designer">
-      </div>
-      <div>
-        <label>Cor</label>
-        <div class="colors" id="colors">
-          <button type="button" class="swatch" data-color="#4a90e2" style="background:#4a90e2" aria-label="Azul"></button>
-          <button type="button" class="swatch" data-color="#e94b3c" style="background:#e94b3c" aria-label="Vermelho"></button>
-          <button type="button" class="swatch" data-color="#f5a623" style="background:#f5a623" aria-label="Laranja"></button>
-          <button type="button" class="swatch" data-color="#7ed321" style="background:#7ed321" aria-label="Verde"></button>
-          <button type="button" class="swatch" data-color="#9b59b6" style="background:#9b59b6" aria-label="Roxo"></button>
+        <label
+          >Nome<br /><input
+            id="nome"
+            oninput="update()"
+            placeholder="Ana Silva"
+        /></label>
+        <label style="margin-top: 8px"
+          >Cargo<br /><input
+            id="cargo"
+            oninput="update()"
+            placeholder="Designer"
+        /></label>
+
+        <!-- 5 cores predefinidas -->
+        <div class="colors">
+          <button
+            class="btn-color"
+            style="background: #4a90e2"
+            onclick="setColor('#4a90e2')"
+            title="Azul"
+          ></button>
+          <button
+            class="btn-color"
+            style="background: #e94b3c"
+            onclick="setColor('#e94b3c')"
+            title="Vermelho"
+          ></button>
+          <button
+            class="btn-color"
+            style="background: #f5a623"
+            onclick="setColor('#f5a623')"
+            title="Laranja"
+          ></button>
+          <button
+            class="btn-color"
+            style="background: #7ed321"
+            onclick="setColor('#7ed321')"
+            title="Verde"
+          ></button>
+          <button
+            class="btn-color"
+            style="background: #9b59b6"
+            onclick="setColor('#9b59b6')"
+            title="Roxo"
+          ></button>
         </div>
       </div>
-    </form>
 
-    <div class="card" aria-live="polite">
-      <div class="name" id="cardName">Ana Silva</div>
-      <div class="job" id="cardJob">Designer</div>
+      <!-- Cartão que mostra resultado -->
+      <div class="card" id="card">
+        <div class="name" id="cardName">Ana Silva</div>
+        <div class="job" id="cardJob">Designer</div>
+      </div>
     </div>
-  </div>
 
-  <script>
-    const nameInput = document.getElementById('nome');
-    const jobInput = document.getElementById('cargo');
-    const cardName = document.getElementById('cardName');
-    const cardJob = document.getElementById('cardJob');
+    <script>
+      // Atualiza nome e cargo no cartão
+      function update() {
+        var nome = document.getElementById("nome").value;
+        var cargo = document.getElementById("cargo").value;
+        document.getElementById("cardName").textContent = nome || "Ana Silva";
+        document.getElementById("cardJob").textContent = cargo || "Designer";
+      }
 
-    function update(){
-      cardName.textContent = nameInput.value.trim() || 'Ana Silva';
-      cardJob.textContent = jobInput.value.trim() || 'Designer';
-    }
+      // Muda cor do cartão e escolhe cor do texto automaticamente
+      function setColor(hex) {
+        var card = document.getElementById("card");
+        card.style.background = hex;
+        // cálculo simples de luminosidade
+        var r = parseInt(hex.substr(1, 2), 16);
+        var g = parseInt(hex.substr(3, 2), 16);
+        var b = parseInt(hex.substr(5, 2), 16);
+        var lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        card.style.color = lum < 128 ? "#fff" : "#111";
+      }
 
-    nameInput.addEventListener('input', update);
-    jobInput.addEventListener('input', update);
-
-    // cores predefinidas
-    const swatches = document.querySelectorAll('.swatch');
-
-    function luminance(hex){
-      const c = hex.replace('#','');
-      const r = parseInt(c.substr(0,2),16)/255;
-      const g = parseInt(c.substr(2,2),16)/255;
-      const b = parseInt(c.substr(4,2),16)/255;
-      return 0.2126*r + 0.7152*g + 0.0722*b;
-    }
-
-    function setCardColor(hex){
-      document.documentElement.style.setProperty('--card-bg', hex);
-      const lum = luminance(hex);
-      document.documentElement.style.setProperty('--card-text', lum < 0.5 ? '#fff' : '#111');
-    }
-
-    swatches.forEach((el,i)=>{
-      el.addEventListener('click', ()=>{
-        swatches.forEach(s=>s.classList.remove('selected'));
-        el.classList.add('selected');
-        setCardColor(el.dataset.color);
-      });
-      if(i===0) el.classList.add('selected');
-    });
-
-    // aplica cor inicial
-    setCardColor(document.querySelector('.swatch.selected')?.dataset.color || '#4a90e2');
-
-    // conteúdo inicial
-    update();
-  </script>
-</body>
+      // Valores iniciais
+      update();
+      setColor("#4a90e2");
+    </script>
+  </body>
 </html>

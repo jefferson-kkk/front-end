@@ -113,6 +113,11 @@
             }
 
             let fahrenheit = (celsius * 1.8) + 32;
+            if (fahrenheit >= 80){
+                document.body.style.backgroundColor = "orange"; // Fundo azul
+            } else {
+            document.body.style.backgroundColor = "lightblue"; // Fundo branco
+            }
 
             resultadoEl.style.color = "#28a745"; // Verde para sucesso
             resultadoEl.innerText = "Resultado: " + fahrenheit.toFixed(1) + " °F";
