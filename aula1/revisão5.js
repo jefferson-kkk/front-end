@@ -10,4 +10,3 @@ for (let i = 0; i < agendar_horarios.length; i++){
     alert(`Atenção: O horário ${horario} é inválido!`);
     }
 }
-

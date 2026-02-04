@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gerador de Cartão (Live Preview)</title>
+  <style>
+    :root{--card-bg:#4a90e2;--card-text:#fff}
+    *{box-sizing:border-box}
+    body{font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif;margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f3f6fb;padding:1rem}
+    .layout{display:flex;gap:1rem;align-items:stretch;width:100%;max-width:900px;background:#fff;padding:1rem;border-radius:10px;box-shadow:0 8px 24px rgba(2,6,23,0.07)}
+    form{flex:1;display:flex;flex-direction:column;gap:.75rem}
+    label{font-size:.95rem;color:#333}
+    input[type=text]{padding:.6rem;border:1px solid #e6e9ee;border-radius:8px;font-size:1rem}
+    .colors{display:flex;gap:.5rem;align-items:center}
+    .color-swatch{width:34px;height:34px;border-radius:8px;cursor:pointer;border:2px solid transparent;box-shadow:0 2px 6px rgba(0,0,0,0.06);transition:transform 140ms, box-shadow 140ms}
+    .color-swatch.selected{outline:3px solid rgba(0,0,0,0.06);transform:translateY(-2px)}
+    .preview{width:340px;display:flex;align-items:center;justify-content:center}
+    .card{width:100%;max-width:320px;padding:1rem;border-radius:12px;background:var(--card-bg);color:var(--card-text);box-shadow:0 10px 30px rgba(10,20,40,0.12);display:flex;flex-direction:column;gap:.4rem;transition:background-color 240ms ease,color 240ms ease,transform 140ms ease}
+    .card.updating{transform:translateY(-6px)}
+    .card .name{font-weight:700;font-size:1.2rem;transition:transform 140ms,opacity 200ms}
+    .card .job{opacity:.95;transition:transform 140ms,opacity 200ms} 
+    @media (max-width:760px){.layout{flex-direction:column}.preview{order:-1;width:100%}}
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <form id="form">
+      <div>
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" placeholder="Ex: Ana Silva" oninput="updateCard()">
+      </div>
+      <div>
+        <label for="cargo">Cargo</label>
+        <input type="text" id="cargo" placeholder="Ex: Designer de Produto" oninput="updateCard()">
+      </div>
+      <div>
+        <label for="email">E-mail</label>
+        <input type="email" id="email" placeholder="seu@exemplo.com" oninput="updateCard()">
+      </div>
+      <div>
+        <label for="phone">Telefone (opcional)</label>
+        <input type="tel" id="phone" placeholder="(11) 98765-4321" oninput="updateCard()">
+      </div>
+      <div>
+        <label>Cor do cartão (5 opções)</label>
+        <div class="colors" id="colors" role="list">
+          <button type="button" class="color-swatch" data-color="#4a90e2" style="background:#4a90e2" title="Azul" aria-label="Azul"></button>
+          <button type="button" class="color-swatch" data-color="#e94b3c" style="background:#e94b3c" title="Vermelho" aria-label="Vermelho"></button>
+          <button type="button" class="color-swatch" data-color="#f5a623" style="background:#f5a623" title="Laranja" aria-label="Laranja"></button>
+          <button type="button" class="color-swatch" data-color="#7ed321" style="background:#7ed321" title="Verde" aria-label="Verde"></button>
+          <button type="button" class="color-swatch" data-color="#9b59b6" style="background:#9b59b6" title="Roxo" aria-label="Roxo"></button>
+          <input type="color" id="customColor" value="#4a90e2" title="Cor personalizada" style="margin-left:.4rem" onchange="selectCustom(this.value)">
+        </div>
+      </div>
+      <p style="color:#666;margin-top:.25rem">Comece digitando — seu cartão será atualizado instantaneamente ✨</p>
+    </form> 
+
+    <div class="preview">
+      <div class="card" id="card" aria-live="polite">
+        <div class="name" id="cardName">Ana Silva</div>
+        <div class="job" id="cardJob">Designer de Produto</div>
+        <div class="contact" style="margin-top:.5rem;opacity:.95;font-size:.85rem;display:flex;flex-direction:column;gap:.25rem">
+          <div id="cardEmail">✉️ seu@exemplo.com</div>
+          <div id="cardPhone">📞 (11) 99999-9999</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const nameInput = document.getElementById('nome');
+    const jobInput = document.getElementById('cargo');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+
+    const card = document.getElementById('card');
+    const cardName = document.getElementById('cardName');
+    const cardJob = document.getElementById('cardJob');
+    const cardEmail = document.getElementById('cardEmail');
+    const cardPhone = document.getElementById('cardPhone');
+
+    const swatches = document.querySelectorAll('.color-swatch');
+    const customColor = document.getElementById('customColor');
+
+    function updateCard(){
+      cardName.innerText = nameInput.value.trim() || 'Ana Silva';
+      cardJob.innerText = jobInput.value.trim() || 'Designer de Produto';
+      cardEmail.innerText = '✉️ ' + (emailInput.value.trim() || 'seu@exemplo.com');
+      cardPhone.innerText = '📞 ' + (phoneInput.value.trim() || '(11) 99999-9999');
+
+      // micro-interaction
+      card.classList.add('updating');
+      clearTimeout(card._updatingTimeout);
+      card._updatingTimeout = setTimeout(()=> card.classList.remove('updating'), 170);
+    }
+
+    function selectColor(hex){
+      document.documentElement.style.setProperty('--card-bg', hex);
+      const lum = luminance(hex);
+      document.documentElement.style.setProperty('--card-text', lum < 0.5 ? '#fff' : '#111');
+    }
+
+    function selectCustom(val){
+      swatches.forEach(s => s.classList.remove('selected'));
+      selectColor(val);
+      customColor.value = val;
+    }
+
+    function luminance(hex){
+      const c = hex.replace('#','');
+      const r = parseInt(c.substr(0,2),16)/255;
+      const g = parseInt(c.substr(2,2),16)/255;
+      const b = parseInt(c.substr(4,2),16)/255;
+      return 0.2126*r + 0.7152*g + 0.0722*b;
+    }
+
+    swatches.forEach((el,i)=>{
+      el.addEventListener('click', ()=>{
+        swatches.forEach(s=>s.classList.remove('selected'));
+        el.classList.add('selected');
+        selectColor(el.dataset.color);
+        customColor.value = el.dataset.color;
+      });
+      el.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); el.click(); } });
+      if(i===0) el.classList.add('selected');
+    });
+
+    // listeners de input em tempo real
+    nameInput.addEventListener('input', updateCard);
+    jobInput.addEventListener('input', updateCard);
+    emailInput.addEventListener('input', updateCard);
+    phoneInput.addEventListener('input', updateCard);
+    customColor.addEventListener('input', (e)=> selectCustom(e.target.value));
+
+    // aplica cor inicial e atualiza conteúdo inicial
+    selectColor(customColor.value);
+    updateCard();
+  </script> 
+</body>
+</html>

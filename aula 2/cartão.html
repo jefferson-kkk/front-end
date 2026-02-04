@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Temperatura</title>
+    <style>
+        /* Reset básico e fonte */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Ocupa a altura total da tela */
+            margin: 0;
+        }
+
+        /* O cartão central */
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 0.9rem;
+            color: #555;
+            display: block;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        /* Estilo do campo de entrada */
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        /* Estilo do botão */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilo do resultado */
+        #resultado {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #28a745; /* Verde para destaque */
+            min-height: 1.5em; /* Evita que o layout pule quando o texto aparece */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h3>Celsius para Fahrenheit</h3>
+        
+        <label for="temperatura">Digite a temperatura em Celsius:</label>
+        <input type="number" id="temperatura" placeholder="Ex: 25">
+        
+        <button onclick="calcular_temp()">Calcular</button>
+
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function calcular_temp() {
+            let input = document.getElementById('temperatura').value;
+            let celsius = parseFloat(input);
+
+            // Reseta a cor do texto para o padrão antes de validar
+            let resultadoEl = document.getElementById("resultado");
+            
+            if (isNaN(celsius)) {
+                resultadoEl.style.color = "#dc3545"; // Vermelho para erro
+                resultadoEl.innerText = "Por favor, digite um número válido.";
+                return; 
+            }
+
+            let fahrenheit = (celsius * 1.8) + 32;
+
+            resultadoEl.style.color = "#28a745"; // Verde para sucesso
+            resultadoEl.innerText = "Resultado: " + fahrenheit.toFixed(1) + " °F";
+        }
+    </script>
+</body>
+</html>
