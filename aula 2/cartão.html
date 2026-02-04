@@ -1,122 +1,109 @@
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor de Temperatura</title>
-    <style>
-        /* Reset básico e fonte */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Ocupa a altura total da tela */
-            margin: 0;
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cartão Minimal</title>
+  <style>
+    :root{--bg:#f7f9fb;--card-bg:#ffffff;--card-text:#111}
+    *{box-sizing:border-box}
+    body{margin:0;height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);font-family:Inter,Segoe UI,system-ui,-apple-system,Arial}
 
-        /* O cartão central */
-        .container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 350px;
-        }
+    .wrap{width:min(520px,94vw);display:grid;grid-template-columns:1fr 260px;gap:1rem;align-items:start}
 
-        h3 {
-            color: #333;
-            margin-bottom: 20px;
-        }
+    form{display:flex;flex-direction:column;gap:.6rem}
+    label{font-size:.85rem;color:#444}
+    input{padding:.55rem;border:1px solid #e6eaf0;border-radius:8px;font-size:1rem;background:transparent}
 
-        label {
-            font-size: 0.9rem;
-            color: #555;
-            display: block;
-            margin-bottom: 8px;
-            text-align: left;
-        }
+    .card{background:var(--card-bg);padding:1rem;border-radius:10px;border:1px solid #eef2f6;color:var(--card-text);display:flex;flex-direction:column;gap:.2rem;min-height:90px;justify-content:center}
+    .name{font-weight:700;font-size:1.05rem}
+    .job{font-size:.9rem;color:#556}
 
-        /* Estilo do campo de entrada */
-        input[type="number"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box; /* Garante que o padding não aumente a largura total */
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
+    /* paleta minimal */
+    .colors{display:flex;gap:.5rem;margin-top:.35rem}
+    .swatch{width:30px;height:30px;border-radius:8px;border:2px solid transparent;cursor:pointer}
+    .swatch.selected{outline:3px solid rgba(0,0,0,0.06);transform:translateY(-2px)}
 
-        input[type="number"]:focus {
-            outline: none;
-            border-color: #007bff;
-        }
+    .note{font-size:.85rem;color:#666;margin-top:.4rem}
 
-        /* Estilo do botão */
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Estilo do resultado */
-        #resultado {
-            margin-top: 20px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #28a745; /* Verde para destaque */
-            min-height: 1.5em; /* Evita que o layout pule quando o texto aparece */
-        }
-    </style>
+    @media (max-width:720px){.wrap{grid-template-columns:1fr;}}
+  </style>
 </head>
 <body>
+  <div class="wrap">
+    <form id="form">
+      <div>
+        <label for="nome">Nome</label>
+        <input id="nome" type="text" placeholder="Ex: Ana Silva">
+      </div>
+      <div>
+        <label for="cargo">Cargo</label>
+        <input id="cargo" type="text" placeholder="Ex: Designer">
+      </div>
+      <div>
+        <label>Cor</label>
+        <div class="colors" id="colors">
+          <button type="button" class="swatch" data-color="#4a90e2" style="background:#4a90e2" aria-label="Azul"></button>
+          <button type="button" class="swatch" data-color="#e94b3c" style="background:#e94b3c" aria-label="Vermelho"></button>
+          <button type="button" class="swatch" data-color="#f5a623" style="background:#f5a623" aria-label="Laranja"></button>
+          <button type="button" class="swatch" data-color="#7ed321" style="background:#7ed321" aria-label="Verde"></button>
+          <button type="button" class="swatch" data-color="#9b59b6" style="background:#9b59b6" aria-label="Roxo"></button>
+        </div>
+      </div>
+    </form>
 
-    <div class="container">
-        <h3>Celsius para Fahrenheit</h3>
-        
-        <label for="temperatura">Digite a temperatura em Celsius:</label>
-        <input type="number" id="temperatura" placeholder="Ex: 25">
-        
-        <button onclick="calcular_temp()">Calcular</button>
-
-        <p id="resultado"></p>
+    <div class="card" aria-live="polite">
+      <div class="name" id="cardName">Ana Silva</div>
+      <div class="job" id="cardJob">Designer</div>
     </div>
+  </div>
 
-    <script>
-        function calcular_temp() {
-            let input = document.getElementById('temperatura').value;
-            let celsius = parseFloat(input);
+  <script>
+    const nameInput = document.getElementById('nome');
+    const jobInput = document.getElementById('cargo');
+    const cardName = document.getElementById('cardName');
+    const cardJob = document.getElementById('cardJob');
 
-            // Reseta a cor do texto para o padrão antes de validar
-            let resultadoEl = document.getElementById("resultado");
-            
-            if (isNaN(celsius)) {
-                resultadoEl.style.color = "#dc3545"; // Vermelho para erro
-                resultadoEl.innerText = "Por favor, digite um número válido.";
-                return; 
-            }
+    function update(){
+      cardName.textContent = nameInput.value.trim() || 'Ana Silva';
+      cardJob.textContent = jobInput.value.trim() || 'Designer';
+    }
 
-            let fahrenheit = (celsius * 1.8) + 32;
+    nameInput.addEventListener('input', update);
+    jobInput.addEventListener('input', update);
 
-            resultadoEl.style.color = "#28a745"; // Verde para sucesso
-            resultadoEl.innerText = "Resultado: " + fahrenheit.toFixed(1) + " °F";
-        }
-    </script>
+    // cores predefinidas
+    const swatches = document.querySelectorAll('.swatch');
+
+    function luminance(hex){
+      const c = hex.replace('#','');
+      const r = parseInt(c.substr(0,2),16)/255;
+      const g = parseInt(c.substr(2,2),16)/255;
+      const b = parseInt(c.substr(4,2),16)/255;
+      return 0.2126*r + 0.7152*g + 0.0722*b;
+    }
+
+    function setCardColor(hex){
+      document.documentElement.style.setProperty('--card-bg', hex);
+      const lum = luminance(hex);
+      document.documentElement.style.setProperty('--card-text', lum < 0.5 ? '#fff' : '#111');
+    }
+
+    swatches.forEach((el,i)=>{
+      el.addEventListener('click', ()=>{
+        swatches.forEach(s=>s.classList.remove('selected'));
+        el.classList.add('selected');
+        setCardColor(el.dataset.color);
+      });
+      if(i===0) el.classList.add('selected');
+    });
+
+    // aplica cor inicial
+    setCardColor(document.querySelector('.swatch.selected')?.dataset.color || '#4a90e2');
+
+    // conteúdo inicial
+    update();
+  </script>
 </body>
 </html>
