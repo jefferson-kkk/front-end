@@ -1,142 +1,139 @@
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Cartão Muito Simples</title>
-    <style>
-      /* Estilos bem simples */
-      body {
-        font-family: Arial;
-        margin: 20px;
-        background: #f5f7fa;
-      }
-      .container {
-        max-width: 600px;
-        margin: 0 auto;
-        display: flex;
-        gap: 20px;
-        align-items: flex-start;
-      }
-      input {
-        width: 100%;
-        padding: 8px;
-        margin-top: 6px;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-      }
-      .card {
-        width: 220px;
-        padding: 12px;
-        border-radius: 8px;
-        background: #fff;
-        color: #111;
-        border: 1px solid #e6e9ee;
-      }
-      .name {
-        font-weight: 700;
-      }
-      .job {
-        color: #555;
-        margin-top: 6px;
-      }
-      .colors {
-        display: flex;
-        gap: 8px;
-        margin-top: 10px;
-      }
-      .btn-color {
-        width: 28px;
-        height: 28px;
-        border-radius: 6px;
-        border: 0;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Formulário simples -->
-    <div class="container">
-      <div>
-        <label
-          >Nome<br /><input
-            id="nome"
-            oninput="update()"
-            placeholder="Ana Silva"
-        /></label>
-        <label style="margin-top: 8px"
-          >Cargo<br /><input
-            id="cargo"
-            oninput="update()"
-            placeholder="Designer"
-        /></label>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Cartão Profissional</title>
 
-        <!-- 5 cores predefinidas -->
-        <div class="colors">
-          <button
-            class="btn-color"
-            style="background: #4a90e2"
-            onclick="setColor('#4a90e2')"
-            title="Azul"
-          ></button>
-          <button
-            class="btn-color"
-            style="background: #e94b3c"
-            onclick="setColor('#e94b3c')"
-            title="Vermelho"
-          ></button>
-          <button
-            class="btn-color"
-            style="background: #f5a623"
-            onclick="setColor('#f5a623')"
-            title="Laranja"
-          ></button>
-          <button
-            class="btn-color"
-            style="background: #7ed321"
-            onclick="setColor('#7ed321')"
-            title="Verde"
-          ></button>
-          <button
-            class="btn-color"
-            style="background: #9b59b6"
-            onclick="setColor('#9b59b6')"
-            title="Roxo"
-          ></button>
-        </div>
-      </div>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #ffffff, #a8c3f1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
 
-      <!-- Cartão que mostra resultado -->
-      <div class="card" id="card">
-        <div class="name" id="cardName">Ana Silva</div>
-        <div class="job" id="cardJob">Designer</div>
-      </div>
+  .container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    display: flex;
+    gap: 40px;
+  }
+
+  .form-area {
+    width: 250px;
+  }
+
+  h2 {
+    margin-top: 0;
+    color: #333;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: 0.3s;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #2a5298;
+    box-shadow: 0 0 5px rgba(42,82,152,0.5);
+  }
+
+  .buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  button {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+  }
+
+  .blue { background: #2a5298; color: white; }
+  .red { background: #e74c3c; color: white; }
+  .green { background: #27ae60; color: white; }
+
+  .card {
+    width: 250px;
+    padding: 20px;
+    border-radius: 15px;
+    background: #2a5298;
+    color: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    transition: 0.3s;
+  }
+
+  .card h3 {
+    margin: 0;
+    font-size: 22px;
+  }
+
+  .card p {
+    margin-top: 8px;
+    opacity: 0.9;
+  }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="form-area">
+    <h2>Editar Cartão</h2>
+
+    Nome:
+    <input id="nome" onkeyup="atualizar()" placeholder="Seu nome">
+
+    Cargo:
+    <input id="cargo" onkeyup="atualizar()" placeholder="Seu cargo">
+
+    <div class="buttons">
+      <button class="blue" onclick="mudarCor('#2a5298')">Azul</button>
+      <button class="red" onclick="mudarCor('#e74c3c')">Vermelho</button>
+      <button class="green" onclick="mudarCor('#27ae60')">Verde</button>
     </div>
+  </div>
 
-    <script>
-      // Atualiza nome e cargo no cartão
-      function update() {
-        var nome = document.getElementById("nome").value;
-        var cargo = document.getElementById("cargo").value;
-        document.getElementById("cardName").textContent = nome || "Ana Silva";
-        document.getElementById("cardJob").textContent = cargo || "Designer";
-      }
+  <div class="card" id="cartao">
+    <h3 id="nomeCartao">Seu Nome</h3>
+    <p id="cargoCartao">Seu Cargo</p>
+  </div>
 
-      // Muda cor do cartão e escolhe cor do texto automaticamente
-      function setColor(hex) {
-        var card = document.getElementById("card");
-        card.style.background = hex;
-        // cálculo simples de luminosidade
-        var r = parseInt(hex.substr(1, 2), 16);
-        var g = parseInt(hex.substr(3, 2), 16);
-        var b = parseInt(hex.substr(5, 2), 16);
-        var lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-        card.style.color = lum < 128 ? "#fff" : "#111";
-      }
+</div>
 
-      // Valores iniciais
-      update();
-      setColor("#4a90e2");
-    </script>
-  </body>
+<script>
+  function atualizar() {
+    var nome = document.getElementById("nome").value;
+    var cargo = document.getElementById("cargo").value;
+
+    document.getElementById("nomeCartao").innerHTML = nome || "Seu Nome";
+    document.getElementById("cargoCartao").innerHTML = cargo || "Seu Cargo";
+  }
+
+  function mudarCor(cor) {
+    document.getElementById("cartao").style.background = cor;
+  }
+</script>
+</body>
 </html>
