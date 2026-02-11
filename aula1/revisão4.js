@@ -6,10 +6,3 @@ let day = ( 24 * 60 * 60 * 1000 );
 
 let conversion = Math.ceil(time / day);
 alert(`faltam ${conversion} dias para o evento`);
-
-
-
-
-
-
-
