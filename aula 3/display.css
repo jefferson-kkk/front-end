@@ -1,0 +1,49 @@
+.nome1{
+    height: 600px;
+    width: 800px;
+    background-color: aquamarine;
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-flow:column ;
+    
+}
+.nome2{
+    background-color: burlywood;
+    height: 180px;
+    width: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 110px;
+    border: 2px solid black;
+}
+.nome3{
+    background-color: chartreuse;
+    height: 180px;
+    width: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 110px;
+    border: 2px solid black;
+}
+.nome4{
+    background-color: cadetblue;
+    height: 180px;
+    width: 700px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: 110px;
+    border:2px solid black;
+}
+.nome5{
+    background-color: coral;
+    height: 80px;
+    width: 90px;
+    border: 2px solid black;
+    display: block;
+    flex-wrap: wrap;  
+}
