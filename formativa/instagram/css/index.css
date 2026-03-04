@@ -1,0 +1,55 @@
+body{
+    margin: 0;
+    background-color: k;
+}
+
+.areas{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 95vh;
+    width: 250px;
+    padding: 20px;
+}
+
+.menu-top{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.menu-bottom{
+    display: flex;
+    flex-direction: column;
+}
+
+.logo{
+    font-size: 32px;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.item{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color:black ;
+    cursor: pointer;
+}
+
+.item:hover{
+
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.material-symbols-outlined{
+    font-size: 26px;
+}
+img{
+    border-radius: 50%;
+    display: flex;
+    padding: 20px;
+    flex-flow: column;
+    align-items: center;
+}
