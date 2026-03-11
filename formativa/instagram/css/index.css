@@ -1,55 +1,263 @@
-body{
-    margin: 0;
-    background-color: k;
+/* MELHORIAS GERAIS NO ESTILO E FONTE */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #fafafa;
+  color: #262626;
 }
 
-.areas{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 95vh;
-    width: 250px;
-    padding: 20px;
+/* CABEÇALHO FIXO NO TOPO */
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 0 20px;
+  background-color: white;
+  border-bottom: 1px solid #dbdbdb;
+  position: sticky; 
+  top: 0;
+  z-index: 100; 
 }
 
-.menu-top{
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+.cabecalho img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
 }
 
-.menu-bottom{
-    display: flex;
-    flex-direction: column;
+.iconin {
+  display: flex;
+  gap: 20px;
+  font-size: 28px;
+  cursor: pointer;
 }
 
-.logo{
-    font-size: 32px;
-    color: white;
-    margin-bottom: 30px;
+.cabecalho input {
+  text-align: left;
+  padding: 8px 15px;
+  width: 200px;
+  border-radius: 8px;
+  border: none;
+  background-color: #efefef; 
+  outline: none;
 }
 
-.item{
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    color:black ;
-    cursor: pointer;
+/* LAYOUT PRINCIPAL - Voltou a ocupar a tela toda */
+.layout {
+  display: flex;
 }
 
-.item:hover{
+/* MENU LATERAL FIXO (No canto esquerdo, mas descolado do topo) */
+.areas {
+  width: 220px;
+  /* O primeiro valor '50px' é o padding do topo! Ele empurra os ícones para baixo */
+  padding: 50px 20px 20px 20px; 
+  display: flex;
+  flex-direction: column;
 
-    padding: 8px;
-    border-radius: 10px;
+  height: calc(100vh - 60px); 
+  position: fixed; /* Prende no canto esquerdo */
+  left: 0;
+  top: 60px; /* Fica logo abaixo do cabeçalho */
+  background-color: #fafafa;
+  z-index: 10;
 }
 
-.material-symbols-outlined{
-    font-size: 26px;
+.menu-top {
+  display: flex;
+  flex-direction: column;
+  gap: 35px; /* Espaçamento entre os ícones */
+  padding-left: 10px;
 }
-img{
-    border-radius: 50%;
-    display: flex;
-    padding: 20px;
-    flex-flow: column;
-    align-items: center;
+
+.item span {
+  font-size: 28px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.item span:hover {
+  transform: scale(1.1);
+}
+
+/* COLUNA CENTRAL (FEED) - Longe do menu, centralizado no espaço que sobra */
+.conteudo-central {
+  margin-left: 260px; /* Compensa o tamanho do menu da esquerda (220 width + 40 paddings) */
+  width: calc(100% - 260px); /* Usa exatamente o restante da tela */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza o feed no meio desse espaço livre */
+  padding-top: 40px;
+  padding-bottom: 50px;
+  gap: 30px;
+}
+
+/* STORIES */
+.stories {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  max-width: 630px; 
+  justify-content: flex-start;
+  padding-bottom: 15px; 
+}
+
+.story-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  width: 70px; 
+}
+
+.story {
+  width: 60px;
+  height: 60px;
+  padding: 3px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.story img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid #fafafa; 
+  display: block;
+}
+
+.story-name {
+  font-size: 12px;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  width: 100%;
+  text-align: center;
+}
+
+/* CONTAINER GERAL DO POST */
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  width: 470px;
+  border-bottom: 1px solid #dbdbdb;
+  padding-bottom: 20px;
+  margin-right: 200px;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.perfilzinho {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.perfilzinho img {
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  object-fit: cover;
+}
+
+.perfilzinho p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600; 
+}
+
+.post-header span { cursor: pointer; }
+
+/* CONTAINER DE MÍDIA (FOTO/VÍDEO) */
+.post-media-container {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden; 
+  border: 1px solid #dbdbdb;
+  background-color: black; 
+}
+
+/* CARROSSEL E SETAS */
+.carrossel-wrapper {
+  position: relative; 
+}
+
+.carrossel-wrapper img {
+  width: 100%;
+  display: block;
+}
+
+.setas {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #262626;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.2s;
+}
+
+.setas:hover {
+  background-color: white;
+}
+
+.seta-esquerda { left: 10px; }
+.seta-direita { right: 10px; }
+
+/* VÍDEO */
+.video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-container video {
+  width: 100%;
+  display: block;
+}
+
+/* ÍCONES DE AÇÃO */
+.post-acoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  margin-top: 5px;
+}
+
+.acoes-esquerda {
+  display: flex;
+  gap: 15px;
+}
+
+.post-acoes span {
+  font-size: 28px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.post-acoes span:hover {
+  color: #8e8e8e; 
+}
+
+/* LEGENDA DO POST */
+.post-legenda p {
+  margin: 5px 0;
+  font-size: 14px;
 }
