@@ -431,9 +431,7 @@ a {
   width: 100%;
 }
 
-/* =========================================
-   CAIXA FLUTUANTE DE MENSAGENS (FLEXBOX)
-========================================= */
+
 .caixa-flutuante-mensagens {
   position: fixed;
   bottom: 0;
@@ -461,9 +459,7 @@ a {
   font-size: 16px;
 }
 
-/* =========================================
-   MODAL DE STORIES (FLEXBOX)
-========================================= */
+
 .fundo-escuro-modal {
   display: none;
   position: fixed;
