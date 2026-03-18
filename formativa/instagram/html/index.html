@@ -1,149 +1,266 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-pt">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" href="/formativa/instagram/css/index.css" />
-
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
+    <link rel="stylesheet" href="/formativa/instagram/css/index.css">
+    <title>Instagram Clone - Ultra Dark</title>
+    
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   </head>
 
   <body>
-    <div class="cabecalho">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMKf3kfBtWETtA4_SbBXJqmCH830YAL0iWHw&s" alt="Logo">
-      <form>
-        <input type="search" placeholder="Pesquisar" />
-      </form>
-      <div class="iconin">
+    <nav class="menu-lateral-esquerdo">
+      <div class="grupo-topo">
+        <a href="#" class="icone-navegacao" data-dica="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icone-svg-instagram">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+      </div>
+      
+      <div class="grupo-meio">
+        <a href="#" class="icone-navegacao" data-dica="Página Inicial"><span class="material-symbols-outlined">home</span></a>
+        <a href="#" class="icone-navegacao" data-dica="Pesquisa"><span class="material-symbols-outlined">search</span></a>
+        <a href="#" class="icone-navegacao" data-dica="Explorar"><span class="material-symbols-outlined">explore</span></a>
+        <a href="#" class="icone-navegacao" data-dica="Reels"><span class="material-symbols-outlined">smart_display</span></a>
+        <a href="#" class="icone-navegacao" data-dica="Mensagens"><span class="material-symbols-outlined">send</span></a>
+        <a href="#" class="icone-navegacao" data-dica="Notificações"><span class="material-symbols-outlined">favorite</span></a>
+        <a href="#" class="icone-navegacao" data-dica="Criar"><span class="material-symbols-outlined">add_box</span></a>
+        <a href="#" class="icone-navegacao" data-dica="Perfil">
+          <img src="https://i.pravatar.cc/150?img=60" alt="Seu Perfil" class="miniatura-perfil">
+        </a>
+      </div>
+      
+      <div class="grupo-rodape">
+        <a href="#" class="icone-navegacao" data-dica="Threads"><span class="material-symbols-outlined">alternate_email</span></a>
+        <a href="#" class="icone-navegacao" data-dica="Mais"><span class="material-symbols-outlined">menu</span></a>
+      </div>
+    </nav>
 
-        <span class="material-symbols-outlined">chat</span>
-        <span class="material-symbols-outlined">favorite</span>
-        <span class="material-symbols-outlined">person</span>
+    <main class="conteiner-principal">
+      
+      <div class="grade-de-conteudo">
+        
+        <section class="area-do-feed">
+          
+          <div class="carrossel-de-stories">
+            <div class="item-do-story" onclick="abrirOStory('ronniecoleman8', 'https://i.pravatar.cc/150?img=11', 'https://picsum.photos/400/700?random=20')">
+              <div class="borda-colorida-story"><img src="https://i.pravatar.cc/150?img=11" alt="Story"></div>
+              <span class="nome-do-usuario-story">ronniecoleman8</span>
+            </div>
+            <div class="item-do-story" onclick="abrirOStory('arnold_br', 'https://i.pravatar.cc/150?img=12', 'https://picsum.photos/400/700?random=21')">
+              <div class="borda-colorida-story"><img src="https://i.pravatar.cc/150?img=12" alt="Story"></div>
+              <span class="nome-do-usuario-story">arnold_br</span>
+            </div>
+            <div class="item-do-story" onclick="abrirOStory('cbum', 'https://i.pravatar.cc/150?img=14', 'https://picsum.photos/400/700?random=23')">
+              <div class="borda-colorida-story"><img src="https://i.pravatar.cc/150?img=14" alt="Story"></div>
+              <span class="nome-do-usuario-story">cbum</span>
+            </div>
+            <div class="item-do-story" onclick="abrirOStory('joao_dev', 'https://i.pravatar.cc/150?img=15', 'https://picsum.photos/400/700?random=24')">
+              <div class="borda-colorida-story"><img src="https://i.pravatar.cc/150?img=15" alt="Story"></div>
+              <span class="nome-do-usuario-story">joao_dev</span>
+            </div>
+          </div>
+
+          <article class="postagem-no-feed">
+            <header class="cabecalho-da-postagem">
+              <div class="informacoes-do-autor">
+                <div class="borda-colorida-story miniatura-autor"><img src="https://i.pravatar.cc/150?img=11" alt="Autor"></div>
+                <p class="nome-autor">ronniecoleman8 <span class="selo-verificado material-symbols-outlined">verified</span></p>
+                <span class="tempo-de-publicacao">• 1 h</span>
+              </div>
+              <span class="material-symbols-outlined icone-opcoes">more_horiz</span> 
+            </header>
+
+            <div class="recipiente-da-imagem">
+               <img id="imagem-carrossel" src="https://picsum.photos/600/750?random=30" alt="Foto da Postagem">
+               
+               <span class="material-symbols-outlined setas seta-esquerda" onclick="mudarFotoCarrossel(-1)">chevron_left</span>
+               <span class="material-symbols-outlined setas seta-direita" onclick="mudarFotoCarrossel(1)">chevron_right</span>
+               
+               <div class="pontos-do-carrossel">
+                 <span class="ponto-indicador ativo" id="ponto-0"></span>
+                 <span class="ponto-indicador" id="ponto-1"></span>
+                 <span class="ponto-indicador" id="ponto-2"></span>
+               </div>
+            </div>
+
+            <div class="botoes-de-acao">
+              <div class="acoes-principais">
+                <span class="material-symbols-outlined">favorite</span>
+                <span class="material-symbols-outlined">mode_comment</span>
+                <span class="material-symbols-outlined">send</span>
+              </div>
+              <span class="material-symbols-outlined">bookmark</span>
+            </div>
+            
+            <div class="area-da-legenda">
+              <p class="numero-de-curtidas">15.9 mil curtidas</p>
+              <p class="texto-da-legenda"><strong class="nome-autor">ronniecoleman8</strong> Dia de treino intenso! 💪 O que acham dessa sequência?</p>
+              <p class="ver-comentarios">Ver todos os 60 comentários</p>
+              <p class="adicionar-comentario">Adicione um comentário...</p>
+            </div>
+          </article>
+
+          <article class="postagem-no-feed">
+            <header class="cabecalho-da-postagem">
+              <div class="informacoes-do-autor">
+                <div class="borda-colorida-story miniatura-autor"><img src="https://i.pravatar.cc/150?img=33" alt="Autor"></div>
+                <p class="nome-autor">maria_silva <span class="selo-verificado material-symbols-outlined">verified</span></p>
+                <span class="tempo-de-publicacao">• 4 h</span>
+              </div>
+              <span class="material-symbols-outlined icone-opcoes">more_horiz</span> 
+            </header>
+
+            <div class="recipiente-da-imagem recipiente-do-video">
+               <video controls width="100%">
+                 <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                 Seu navegador não suporta vídeos.
+               </video>
+            </div>
+
+            <div class="botoes-de-acao">
+              <div class="acoes-principais">
+                <span class="material-symbols-outlined">favorite</span>
+                <span class="material-symbols-outlined">mode_comment</span>
+                <span class="material-symbols-outlined">send</span>
+              </div>
+              <span class="material-symbols-outlined">bookmark</span>
+            </div>
+            
+            <div class="area-da-legenda">
+              <p class="numero-de-curtidas">22.4 mil curtidas</p>
+              <p class="texto-da-legenda"><strong class="nome-autor">maria_silva</strong> Testando o formato de vídeo aqui no feed! 🎬</p>
+              <p class="ver-comentarios">Ver todos os 112 comentários</p>
+              <p class="adicionar-comentario">Adicione um comentário...</p>
+            </div>
+          </article>
+
+        </section>
+
+        <aside class="area-de-sugestoes">
+          <div class="meu-perfil-resumo">
+            <img src="https://i.pravatar.cc/150?img=60" alt="Meu Perfil">
+            <div class="textos-do-perfil">
+              <span class="nome-de-usuario">seu_usuario_dev</span>
+              <span class="nome-completo">Seu Nome</span>
+            </div>
+            <button class="botao-de-acao-azul">Mudar</button>
+          </div>
+
+          <div class="cabecalho-das-sugestoes">
+            <span class="titulo-cinza">Sugestões para si</span>
+            <span class="botao-ver-tudo">Ver tudo</span>
+          </div>
+
+          <div class="lista-de-sugestoes">
+            <div class="sugestao-de-amigo">
+              <img src="https://i.pravatar.cc/150?img=33" alt="Sugerido">
+              <div class="textos-do-perfil">
+                <span class="nome-de-usuario">maria_silva</span>
+                <span class="motivo-da-sugestao">Novo no Instagram</span>
+              </div>
+              <button class="botao-de-acao-azul">Seguir</button>
+            </div>
+            <div class="sugestao-de-amigo">
+              <img src="https://i.pravatar.cc/150?img=45" alt="Sugerido">
+              <div class="textos-do-perfil">
+                <span class="nome-de-usuario">pedro.dev</span>
+                <span class="motivo-da-sugestao">Sugestão para si</span>
+              </div>
+              <button class="botao-de-acao-azul">Seguir</button>
+            </div>
+          </div>
+          
+          <footer class="rodape-de-links">
+            <a href="#">Sobre</a> · <a href="#">Ajuda</a> · <a href="#">Imprensa</a> · <a href="#">API</a> · <a href="#">Privacidade</a> · <a href="#">Termos</a>
+            <p class="direitos-autorais">© 2024 INSTAGRAM CLONE</p>
+          </footer>
+        </aside>
+
+      </div>
+    </main>
+
+    <div class="caixa-flutuante-mensagens">
+      <div class="lado-esquerdo-mensagens">
+        <span class="material-symbols-outlined">send</span>
+        <span class="titulo-mensagens">Mensagens</span>
+      </div>
+      <div class="lado-direito-mensagens">
+        <span class="material-symbols-outlined">edit_square</span>
+        <span class="material-symbols-outlined">keyboard_arrow_up</span>
       </div>
     </div>
 
-    <div class="layout">
-      
-      <div class="areas">
-        <div class="menu-top">
-          <div class="item"><span class="material-symbols-outlined">home</span></div>
-          <div class="item"><span class="material-symbols-outlined">search</span></div>
-          <div class="item"><span class="material-symbols-outlined">explore</span></div>
-          <div class="item"><span class="material-symbols-outlined">smart_display</span></div>
-          <div class="item"><span class="material-symbols-outlined">send</span></div>
-          <div class="item"><span class="material-symbols-outlined">favorite</span></div>
-          <div class="item"><span class="material-symbols-outlined">add</span></div>
+    <div id="janela-modal-story" class="fundo-escuro-modal">
+      <span class="botao-fechar-modal material-symbols-outlined" onclick="fecharOStory()">close</span>
+      <div class="visualizador-do-story">
+        <div class="recipiente-da-barra-de-progresso">
+          <div class="barra-de-progresso-animada" id="progresso-do-story"></div>
         </div>
-      </div>
-
-      <div class="conteudo-central">
-        
-        <div class="stories">
-          
-          <div class="story-wrapper">
-            <div class="story"><img src="https://i.pravatar.cc/150?img=55"></div>
-            <span class="story-name">carlos_99</span>
-          </div>
-
-          <div class="story-wrapper">
-            <div class="story"><img src="https://i.pravatar.cc/150?img=5"></div>
-            <span class="story-name">ana.julia</span>
-          </div>
-
-          <div class="story-wrapper">
-            <div class="story"><img src="https://i.pravatar.cc/150?img=58"></div>
-            <span class="story-name">marcos.dev</span>
-          </div>
-
-          <div class="story-wrapper">
-            <div class="story"><img src="https://i.pravatar.cc/150?img=70"></div>
-            <span class="story-name">bia_silva</span>
-          </div>
-
-          <div class="story-wrapper">
-            <div class="story"><img src="https://i.pravatar.cc/150?img=43"></div>
-            <span class="story-name">henrique</span>
-          </div>
-
+        <div class="cabecalho-dentro-do-story">
+          <img id="foto-perfil-modal" src="" alt="Avatar">
+          <span id="nome-usuario-modal">usuario</span>
         </div>
-
-        <div class="conteudo">
-          <div class="post-header">
-            <div class="perfilzinho">
-              <img src="https://i.pravatar.cc/150?img=43" alt="">
-              <p>henrique</p>
-            </div>
-            <span class="material-symbols-outlined">more_horiz</span> 
-          </div>
-
-          <div class="post-media-container carrossel-wrapper">
-             <img id="imagem-carrossel" src="https://picsum.photos/470/470?random=1" alt="Carrossel Foto 1">
-             <span class="material-symbols-outlined setas seta-esquerda" onclick="mudarFotoCarrossel(-1)">chevron_left</span>
-             <span class="material-symbols-outlined setas seta-direita" onclick="mudarFotoCarrossel(1)">chevron_right</span>
-          </div>
-
-          <div class="post-acoes">
-            <div class="acoes-esquerda">
-              <span class="material-symbols-outlined">favorite</span>
-              <span class="material-symbols-outlined">mode_comment</span>
-              <span class="material-symbols-outlined">send</span>
-            </div>
-            <span class="material-symbols-outlined">bookmark</span>
-          </div>
-          
-          <div class="post-legenda">
-            <p><strong>12 mil curtidas</strong></p>
-            <p><strong>henrique</strong> Curtindo o dia! #foto #viagem</p>
-          </div>
-        </div>
-
-        <div class="conteudo post-video-wrapper">
-          <div class="post-header">
-            <div class="perfilzinho">
-              <img src="https://i.pravatar.cc/150?img=33" alt="">
-              <p>maria_travels</p>
-            </div>
-            <span class="material-symbols-outlined">more_horiz</span> 
-          </div>
-
-          <div class="post-media-container video-container">
-            <video controls width="100%">
-              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-            </video>
-          </div>
-
-          <div class="post-acoes">
-            <div class="acoes-esquerda">
-              <span class="material-symbols-outlined">favorite</span>
-              <span class="material-symbols-outlined">mode_comment</span>
-              <span class="material-symbols-outlined">send</span>
-            </div>
-            <span class="material-symbols-outlined">bookmark</span>
-          </div>
-          
-          <div class="post-legenda">
-            <p><strong>45 mil curtidas</strong></p>
-            <p><strong>maria_travels</strong> Vibe incrível desse lugar! #praia #sunset</p>
-          </div>
-        </div>
-
+        <img id="imagem-central-modal" src="" alt="Conteúdo Story">
       </div>
     </div>
 
     <script>
+      // 1. LÓGICA DO CARROSSEL (100% MANUAL)
       const imagensCarrossel = [
-        "https://picsum.photos/470/470?random=1",
-        "https://picsum.photos/470/470?random=2",
-        "https://picsum.photos/470/470?random=3"
+        "https://picsum.photos/600/750?random=30",
+        "https://picsum.photos/600/750?random=31",
+        "https://picsum.photos/600/750?random=32"
       ];
       let indiceCarrosselAtual = 0; 
+      
       function mudarFotoCarrossel(direcao) {
+        // Tira o destaque do pontinho atual
+        document.getElementById('ponto-' + indiceCarrosselAtual).classList.remove('ativo');
+        
+        // Calcula a próxima foto de forma matemática (em loop infinito)
         indiceCarrosselAtual = (indiceCarrosselAtual + direcao + imagensCarrossel.length) % imagensCarrossel.length;
+        
+        // Troca a imagem
         document.getElementById('imagem-carrossel').src = imagensCarrossel[indiceCarrosselAtual];
+        
+        // Adiciona o destaque no novo pontinho
+        document.getElementById('ponto-' + indiceCarrosselAtual).classList.add('ativo');
+      }
+
+      // 2. LÓGICA DOS STORIES
+      let cronometroDoStory;
+      const modalDoStory = document.getElementById('janela-modal-story');
+      const barraDeProgresso = document.getElementById('progresso-do-story');
+
+      function abrirOStory(nomeUsuario, linkAvatar, linkImagem) {
+        document.getElementById('nome-usuario-modal').innerText = nomeUsuario;
+        document.getElementById('foto-perfil-modal').src = linkAvatar;
+        document.getElementById('imagem-central-modal').src = linkImagem;
+        modalDoStory.style.display = 'flex';
+        
+        barraDeProgresso.style.width = '0%';
+        let largura = 0;
+        
+        clearInterval(cronometroDoStory);
+        cronometroDoStory = setInterval(() => {
+          if (largura >= 100) {
+            fecharOStory();
+          } else {
+            largura++;
+            barraDeProgresso.style.width = largura + '%';
+          }
+        }, 50); 
+      }
+
+      function fecharOStory() {
+        modalDoStory.style.display = 'none';
+        clearInterval(cronometroDoStory);
       }
     </script>
   </body>
