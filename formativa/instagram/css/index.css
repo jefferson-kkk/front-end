@@ -13,6 +13,7 @@ body {
     sans-serif;
   background-color: #000000;
   color: #f5f5f5;
+    /*  esconde o excesso de texto ou img e coloca scroll */
   overflow-x: hidden;
 }
 
@@ -21,9 +22,9 @@ a {
   color: inherit;
 }
 
-/* =========================================
+/* 
    MENU LATERAL ESQUERDO (A MÁGICA DO FLEXBOX)
-========================================= */
+*/
 .menu-lateral-esquerdo {
   position: fixed;
   top: 0;
@@ -36,6 +37,8 @@ a {
   flex-direction: column;
   align-items: center;
   padding: 30px 0;
+  /* rucial usada para controlar a ordem de empilhamento
+   dos elementos em uma página da web */
   z-index: 1000;
 }
 
@@ -44,6 +47,7 @@ a {
 }
 .grupo-meio {
   display: flex;
+    /* Faz a mágica acontecer: esconde o excesso e coloca scroll */
   flex-direction: column;
   gap: 12px;
 }
@@ -70,6 +74,8 @@ a {
 }
 .icone-navegacao span {
   font-size: 24px;
+  /* efeito de transição suave onde se seleciona o elemento desejado
+  e a duarção da transição */
   transition: transform 0.2s;
 }
 .icone-svg-instagram {
@@ -79,6 +85,9 @@ a {
 }
 .icone-navegacao:hover span,
 .icone-navegacao:hover .icone-svg-instagram {
+  /* aumenta a scala de  um elemento
+  selecionado ex: hight:100 e width: 100 esse
+  comando aumenta em 5 a img */
   transform: scale(1.05);
 }
 
@@ -86,6 +95,7 @@ a {
   width: 26px;
   height: 26px;
   border-radius: 50%;
+   /* é utilizado para redimensionar uma imagem ou vídeo para cobrir todo o contêiner */
   object-fit: cover;
 }
 
