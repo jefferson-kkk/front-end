@@ -53,4 +53,4 @@ function App() {
   );
 }
 
-export default App; // Exportação única no final
+export default App;
