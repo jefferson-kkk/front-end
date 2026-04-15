@@ -13,6 +13,7 @@ export function Header({ titulo }) {
       }}
     >
       <h1>{titulo}</h1>
+      
     </header>
   );
 }
