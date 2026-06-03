@@ -49,7 +49,7 @@ function App() {
       return evt;
     }));
   };
-
+// inscrever alunos
   const inscreverAluno = (id) => {
     setEventList(eventList.map(evt => 
       evt.id === id && evt.vagas > 0 ? { ...evt, vagas: evt.vagas - 1 } : evt
@@ -57,9 +57,11 @@ function App() {
   };
 
   const deleteEvent = (id) => {
-    setEventList(eventList.filter(evt => evt.id !== id));
+    setEventList(eventList.filter(evt => evt.id !== id));   
   };
 
+
+// exlui todas as tarefas
   const clearSchedule = () => {
     if (window.confirm("Deseja realmente limpar TODO o cronograma? Esta ação é irreversível.")) {
       setEventList([]);
@@ -132,6 +134,7 @@ function App() {
           ))}
         </div>
       </section>
+      
 
       {/* Listagem de Eventos */}
       <main className="event-grid">
