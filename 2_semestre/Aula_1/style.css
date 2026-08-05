@@ -1,0 +1,157 @@
+/* Design System - Variáveis */
+:root {
+    --cor-fundo: #f4f7f6;
+    --cor-cabecalho: #1e293b;
+    --cor-texto-claro: #f8fafc;
+    --cor-texto-escuro: #334155;
+    --cor-card: #ffffff;
+    --cor-primaria: #3b82f6;
+    --cor-alerta-fundo: #fee2e2;
+    --cor-alerta-borda: #ef4444;
+    --cor-normal-borda: #10b981;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-escuro);
+}
+
+/* Header */
+header {
+    background-color: var(--cor-cabecalho);
+    color: var(--cor-texto-claro);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-conexao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+}
+
+.ponto-status {
+    width: 12px;
+    height: 12px;
+    background-color: var(--cor-normal-borda);
+    border-radius: 50%;
+}
+
+/* Main e Controles */
+main {
+    padding: 2rem;
+}
+
+.controles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+select, .btn-primario {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #cbd5e1;
+    font-size: 1rem;
+}
+
+.btn-primario {
+    background-color: var(--cor-primaria);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-primario:hover {
+    opacity: 0.9;
+}
+
+/* Grid de Sensores */
+.grid-sensores {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 coluna no Mobile */
+    gap: 20px;
+}
+
+/* Desktop: 3 colunas */
+@media (min-width: 768px) {
+    .grid-sensores {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Cards */
+.card {
+    background-color: var(--cor-card);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-left: 6px solid var(--cor-normal-borda); /* Status Normal */
+}
+
+.card.card-alerta {
+    background-color: var(--cor-alerta-fundo);
+    border-left-color: var(--cor-alerta-borda); /* Status Crítico */
+}
+
+.card-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-topo h3 {
+    font-size: 1.1rem;
+}
+
+.card-tipo {
+    font-size: 0.85rem;
+    color: #64748b;
+    background: #e2e8f0;
+    padding: 3px 8px;
+    border-radius: 12px;
+}
+
+.card-valor {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    background-color: var(--cor-cabecalho);
+    color: var(--cor-texto-claro);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}

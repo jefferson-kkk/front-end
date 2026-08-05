@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Sensores</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <span class="icone-logo">📊</span>
+            <h1>Dashboard de Sensores</h1>
+        </div>
+        <div class="status-conexao">
+            <span class="ponto-status"></span> Online
+        </div>
+    </header>
+
+    <main>
+        <!-- Seção de Filtros e Controles -->
+        <section class="controles">
+            <div class="filtro">
+                <label for="filtro-tipo">Filtrar por tipo:</label>
+                <select id="filtro-tipo">
+                    <option value="Todos">Todos</option>
+                    <option value="Temperatura">Temperatura</option>
+                    <option value="Umidade">Umidade</option>
+                    <option value="Pressão">Pressão</option>
+                </select>
+            </div>
+            <button id="btn-atualizar" class="btn-primario">Atualizar Dados</button>
+        </section>
+
+        <!-- Seção do Grid de Sensores (Renderizado via JS) -->
+        <section id="grid-sensores" class="grid-sensores">
+            <!-- Cards entrarão aqui dinamicamente -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Dashboard Tech.</p>
+        <p>Última atualização: <span id="hora-atualizacao">--:--:--</span></p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+        // Massa de Dados (Dataset Inicial)
+const sensoresIniciais = [
+    { id: 1, nome: "Sensor Galpão A", tipo: "Temperatura", valor: 24.5, unidade: "°C", status: "normal" },
+    { id: 2, nome: "Sensor Estufa 02", tipo: "Umidade", valor: 88.0, unidade: "%", status: "critico" },
+    { id: 3, nome: "Sensor Compressor", tipo: "Pressão", valor: 6.2, unidade: "bar", status: "normal" },
+    { id: 4, nome: "Sensor Câmara Fria", tipo: "Temperatura", valor: -2.1, unidade: "°C", status: "normal" },
+    { id: 5, nome: "Sensor Almoxarifado", tipo: "Umidade", valor: 45.5, unidade: "%", status: "normal" },
+    { id: 6, nome: "Sensor Caldeira", tipo: "Temperatura", valor: 98.4, unidade: "°C", status: "critico" }
+];
+
+// Cópia do array para manipularmos os valores nas atualizações simuladas
+let sensoresAtuais = [...sensoresIniciais];
+
+// Selecionando os elementos do DOM
+const containerSensores = document.getElementById("grid-sensores");
+const selectFiltro = document.getElementById("filtro-tipo");
+const btnAtualizar = document.getElementById("btn-atualizar");
+const spanHora = document.getElementById("hora-atualizacao");
+
+// Função para atualizar a hora no rodapé
+function atualizarHorario() {
+    const agora = new Date();
+    const horas = String(agora.getHours()).padStart(2, '0');
+    const minutos = String(agora.getMinutes()).padStart(2, '0');
+    const segundos = String(agora.getSeconds()).padStart(2, '0');
+    spanHora.textContent = `${horas}:${minutos}:${segundos}`;
+}
+
+// Renderização Dinâmica do DOM
+function renderizarDashboard(listaSensores) {
+    containerSensores.innerHTML = ""; // Limpa os cards antigos
+
+    listaSensores.forEach(sensor => {
+        // Verifica se o status é crítico para adicionar a classe extra
+        const classeAlerta = sensor.status === "critico" ? "card-alerta" : "";
+
+        // Cria o HTML do card usando Template Strings
+        const cardHTML = `
+            <div class="card ${classeAlerta}">
+                <div class="card-topo">
+                    <h3>${sensor.nome}</h3>
+                    <span class="card-tipo">${sensor.tipo}</span>
+                </div>
+                <div class="card-valor">
+                    ${sensor.valor.toFixed(1)} <span style="font-size: 1.2rem">${sensor.unidade}</span>
+                </div>
+            </div>
+        `;
+        
+        containerSensores.innerHTML += cardHTML;
+    });
+
+    atualizarHorario();
+}
+
+// Filtros em Memória
+function aplicarFiltro() {
+    const tipoSelecionado = selectFiltro.value;
+
+    if (tipoSelecionado === "Todos") {
+        renderizarDashboard(sensoresAtuais);
+    } else {
+        const sensoresFiltrados = sensoresAtuais.filter(sensor => sensor.tipo === tipoSelecionado);
+        renderizarDashboard(sensoresFiltrados);
+    }
+}
+
+// Simulação de Atualização (Tempo Real)
+function simularAtualizacao() {
+    sensoresAtuais = sensoresAtuais.map(sensor => {
+        // Gera um número aleatório entre -2 e 2 para variar o valor do sensor
+        const variacao = (Math.random() * 4) - 2; 
+        
+        return {
+            ...sensor,
+            valor: sensor.valor + variacao // Aplica a variação no valor original
+        };
+    });
+
+    aplicarFiltro(); // Renderiza a tela novamente respeitando o filtro ativo
+}
+
+// Event Listeners (Ouvintes de eventos)
+selectFiltro.addEventListener("change", aplicarFiltro);
+btnAtualizar.addEventListener("click", simularAtualizacao);
+
+// Inicialização (Executa ao abrir a página)
+renderizarDashboard(sensoresAtuais);
+setInterval(simularAtualizacao, 30000); // Atualiza sozinho a cada 30 segundos
+    </script>
+</body>
+</html>
