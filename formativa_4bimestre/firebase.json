@@ -1,0 +1,26 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "perto-mapa",
+          "appId": "1:622420036163:android:984229fa8f0bcfd6ca22f6",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "perto-mapa",
+          "configurations": {
+            "android": "1:622420036163:android:984229fa8f0bcfd6ca22f6",
+            "ios": "1:622420036163:ios:f2e8654437903d5fca22f6",
+            "web": "1:622420036163:web:35e4807b0d49c031ca22f6"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /locais/{localId} {
+      function signedIn() {
+        return request.auth != null;
+      }
+
+      function validLocal(data) {
+        return data.keys().hasAll([
+            'nome', 'categoria', 'cidade', 'avaliacao', 'distancia',
+            'horario', 'descricao', 'favorito', 'latitude', 'longitude'
+          ])
+          && data.keys().hasOnly([
+            'nome', 'categoria', 'cidade', 'avaliacao', 'distancia',
+            'horario', 'descricao', 'favorito', 'latitude', 'longitude'
+          ])
+          && data.nome is string && data.nome.size() > 0 && data.nome.size() <= 120
+          && data.categoria is string && data.categoria.size() <= 40
+          && data.cidade in ['São Paulo', 'Campinas', 'Jundiaí']
+          && data.avaliacao is number && data.avaliacao >= 0 && data.avaliacao <= 5
+          && data.distancia is number && data.distancia >= 0 && data.distancia <= 10000
+          && data.horario is string && data.horario.size() <= 120
+          && data.descricao is string && data.descricao.size() <= 2000
+          && data.favorito is bool
+          && data.latitude is number && data.latitude >= -90 && data.latitude <= 90
+          && data.longitude is number && data.longitude >= -180 && data.longitude <= 180;
+      }
+
+      allow read: if signedIn();
+      allow create: if signedIn() && validLocal(request.resource.data);
+      allow update: if signedIn() && validLocal(request.resource.data);
+      allow delete: if signedIn();
+    }
+  }
+}
